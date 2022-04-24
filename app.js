@@ -92,11 +92,13 @@ app.listen(process.env.PORT || 3000)
   
 
   process.on('uncaughtException', function (err) {
+    console.log(err)
   logger.debug(err)
     
 });
 
 process.on('unhandledRejection', (reason, promise) => {
+  console.log(reason)
   logger.debug(reason)
 })
 
@@ -106,5 +108,6 @@ process.on('unhandledRejection', (reason, promise) => {
 
   
 } catch (error) {
+  console.log(error)
   logger.debug(error)
 }
