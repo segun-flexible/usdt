@@ -1,0 +1,98 @@
+<%-include("../../partials/header");%>
+
+<div class="container-fluid mt--6">
+
+
+
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3 header-title">Transfer Details</h4>
+        
+                    <form id="transfer">
+                        
+                        <div class="form-group">
+                            <label for="accountme">Transfer From</label>
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option><%=user.plan_name || 'VIP 0'%> (<%=user.account_no%>) - <%=user.balance.toLocaleString()%> USDT</option>
+                                
+                            </select>
+                        </div>
+    
+        
+                        
+        
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3 header-title">Reciever Details</h4>
+                    
+        
+                        <div class="form-group">
+                            <label for="amount">Amount (USDT)</label>
+                            <input type="number" value="0" class="form-control" id="amount" required>
+                        </div>
+        
+                        
+                        
+                        <div class="form-group">
+                            <label for="account_no">Reciever Username</label>
+                            <input type="text" class="form-control" id="account_no" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="amount">Charges Fee</label>
+                            <input readonly disabled type="text" value="0" class="form-control" id="fees">
+                        </div>
+        
+                        <button type="submit" id="submit" class="btn btn-primary waves-effect waves-light">Initialize Transfer</button>
+                    </form>
+        
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+    <div class="modal fade" id="tips" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle"><i class="bi bi-megaphone"></i> Tips</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Transferring Funds Does not Require Withdrawal PIN Unlike When Withdrawing To Your Wallet.
+                    <br>
+                    Please, Transfer With Caution, And Be Sure Of The Receiver Account Number
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <span class="d-flex">Close</span>
+                    </button>
+                    <button id="closenotice" type="button" class="btn btn-primary ml-1" data-dismiss="modal">
+                        <span class="d-flex">Okay</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button id="tipsBtn" data-toggle="modal" data-target="#tips" hidden></button>
+<script src="/js/user/transfer.js"></script>
+<script src="/js/partials/fetcher.js"></script>
+<script src="/js/partials/sweetalert.js"></script>
+<%-include("../../partials/footer");%>

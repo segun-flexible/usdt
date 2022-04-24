@@ -1,0 +1,154 @@
+<%- include('../../partials/header'); %>
+
+
+
+
+    <div class="container-fluid dashboard-content">
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <h4 class="page-title">
+                        <%= title %>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card">
+                    <%if(history.length > 1){%>
+
+                    
+                    <h5 class="card-header">Proof List
+                        <div class="actions float-right">
+                            
+                        
+                            <a href="javascript: void(0);" id="approved-marked" class="btn btn-xs btn-info ml-1 pay">Approved Marked <i
+                                    class="fa fa-paper-plane" aria-hidden="true"></i></a>
+                        
+                            <a href="javascript: void(0);" id="delete-all" class="btn btn-xs btn-danger ml-1">Delete Marked <i class="fa fa-trash"
+                                    aria-hidden="true"></i></a>
+                        
+                        
+                        </div>
+
+                    </h5>
+                    <%}%>
+
+                    <div class="card-body p-0">
+                        <%if(history.length> 0){ %>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="bg-light">
+                                        <tr class="border-0">
+                                            
+                                            <%if(history.length > 1){%>
+
+                                            
+                                            <th class="border-0">
+                                                
+                                                <label class="custom-control custom-checkbox">
+                                                <input id="mark-head" type="checkbox" class="custom-control-input"><span class="custom-control-label"></span>
+                                            </label>
+                                            
+                                            </th>
+                                            <%}%>
+
+                                            <th class="border-0">#</th>
+                                            <th class="border-0">User</th>
+                                            <th class="border-0">Plan Name</th>
+                                            <th class="border-0">Plan Amount</th>
+                                            <th class="border-0">Proof</th>
+                                            <th class="border-0">Date</th>
+                                            <th class="border-0">Action</th>
+                                            
+        
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%history.map((ht,index)=>{ %>
+                                            <tr>
+                                                <%if(history.length > 1){%>
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                    <input data-proof="<%=ht.pr_proof %>" data-plan_price="<%=ht.p_price %>" data-plan_name="<%=ht.p_name %> " data-user_id="<%=ht.pr_user %>" data-id="<%=ht.pr_id %>" data-plan_id="<%=ht.pr_planid %>" id="mark" type="checkbox" class="custom-control-input"><span
+                                                        class="custom-control-label"></span>
+                                                </label>
+
+                                                </td>
+                                                <%}%>
+
+                                                <td>
+                                                    <%=index + 1 %>
+                                                </td>
+        
+                                                <td>
+                                                    <%=ht.username %>
+                                                </td>
+
+                                                <td>
+                                                    <%=ht.p_name%>
+                                                </td>
+
+                                                <td>
+                                                    <strong><%=ht.p_price%></strong> USDT
+                                                </td>
+                                                
+                                                <td>
+                                                    <a href="javascript: void(0);" class="btn btn-xs btn-info ml-1 view" data-toggle="modal" data-target="#proof-<%=ht.pr_id%>"><i class="fa fa-eye" aria-hidden="true"></i> View Proof</a>
+                                                </td>
+                                                <td>
+                                                    <%=ht.date%>,<%=ht.time%>
+                                                </td>
+
+                                                
+        
+                                                <td>
+                                                    <a id="approveProof"
+                                                    href="javascript: void(0);" class="btn btn-xs btn-info ml-1 approved" data-proof="<%=ht.pr_proof %>" data-plan_name="<%=ht.p_name %>" data-plan_price="<%=ht.p_price %>" data-user_id="<%=ht.pr_user %>" data-id="<%=ht.pr_id %>" data-plan_id="<%=ht.pr_planid %>"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
+        
+                                                    <a id="delete-one" data-proof="<%=ht.pr_proof %>"  data-id="<%=ht.pr_id%>" href="javascript: void(0);" class="btn btn-xs btn-danger ml-1 "><i
+                                                            class="fa fa-trash" aria-hidden="true"></i></a>
+                                                </td>
+                                              
+        
+        
+                                            </tr>
+
+                                            <!--PROOF MODAL-->
+                                            <%-include("./modal/proofModal",{h:ht})%>
+                                            <!--PROOF MODAL-->
+                                            
+                                            <% }) %>
+        
+                                                <tr>
+                                                    <td colspan="9"></td>
+                                                </tr>
+                                    </tbody>
+        
+                                </table>
+
+                                <%-include("../../partials/pagination")%>
+                                
+        
+                            </div>
+                            <% }else{%>
+                                <h3 class="text-center pt-3">No Proof At The Moment</h3>
+                                <%}%>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        
+    </div>
+
+<script src="/js/admin/proof/proof.js"></script>
+<%-include('../../partials/footer'); %>

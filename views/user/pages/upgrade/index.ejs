@@ -1,0 +1,163 @@
+<%-include("../../partials/header");%>
+
+<div class="container-fluid mt--6">
+
+
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="bg-light">
+                                <tr class="border-0">
+                                    <th class="border-0">Grade Selection</th>
+                                    <th class="border-0">Amount</th>
+                                    <th class="border-0">Maximum Daily Withdrawal</th>
+                                    <th class="border-0">Maximum Total Withdrawal</th>
+                                    <th class="border-0">Action</th>
+                                    
+                                    
+                                    
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%plans.map((pl,index)=>{ %>
+                                    <tr>
+                                        <td>
+                                            <strong><%=pl.p_name%></strong>
+                                        </td>
+                                        
+
+                                        <td>
+                                            <%=pl.p_price.toLocaleString()%> USDT
+                                        </td>
+                                        
+                                        <td>
+                                            <%=pl.p_daily_withdrawal_limit.toLocaleString()%> USDT
+                                        </td>
+                                        
+                                        <td>
+                                            <%=pl.p_total_withdrawal_limit.toLocaleString()%> USDT
+                                        </td>
+                                        
+                                        <td>
+                                            <%if(history.find(ht => ht.plan_id == pl.p_id)){%>
+                                                
+                                            <%}else{%>
+                                                <button onclick="whichVIP('<%=pl.p_id%>')" data-toggle="modal" data-target="#tips" class="btn btn-info btn-sm waves-effect waves-light">Subscribe <i class="fa fa-rocket" aria-hidden="true"></i></button>
+                                            <%}%>
+                                            
+                                        </td>
+                                        
+
+                                    </tr>
+
+                                    
+                                    
+                                    <% }) %>
+
+                                        
+                            </tbody>
+
+                        </table>
+
+
+
+                        
+
+                    </div>
+                        
+        
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div>
+
+
+
+    </div>
+
+
+
+
+    <div class="modal fade" id="tips" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle"><i class="bi bi-megaphone"></i> Tips</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <button onclick="autoSubscribe(this)" type="button" class="btn btn-primary ml-1">Auto Payment</button>
+                        </div>
+                        <div class="col-6">
+                            <button data-toggle="modal" data-target="#manual" type="button" class="btn btn-primary ml-1">Manual Payment</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer pt-5">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <span class="d-flex">Close</span>
+                    </button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="modal fade" id="manual" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle"><i class="bi bi-megaphone"></i> Subscribe Using Manual Payment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Please Send <strong>USDT</strong> for successful payment to any of the USDT wallet address below, and also beware of the wallet network.
+                    <br>
+                    Upload Payment Proof To This System Using Below Form And Wait For Response.
+
+                    <div class="row pt-3" style="word-wrap: break-word !important;">
+                        <div class="col-12 pb-5"><strong>TAVuDfRecQjKtHTG545DXxweK9Kywmkwt9</strong> - TRC-20</div>
+                        
+                        <div class="col-12 pb-2"><strong>0x14AF2024C1405121CbF600B61ca23DEA9300d555</strong> - BEP-20</div>
+                        
+                    </div>
+
+                    <form id="proofform" class="pt-5">
+
+                        <div class="form-group">
+                            <label for="proof">Proof Of Payment (Payment Screenshot)</label>
+                            <input type="file" accept="image/*" class="form-control" id="proof" required>
+                        </div>
+                        
+                        <button class="btn btn-primary">
+                            <span class="d-flex">Submit Proof</span>
+                        </button><button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            <span class="d-flex">Close</span>
+                        </button>
+                        
+                    </form>
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+<script src="/js/user/upgrade.js"></script>
+<script src="/js/partials/fetcher.js"></script>
+<script src="/js/partials/sweetalert.js"></script>
+<%-include("../../partials/footer");%>

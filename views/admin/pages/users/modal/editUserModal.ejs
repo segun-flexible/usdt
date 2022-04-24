@@ -1,0 +1,63 @@
+<div id="edit-<%=us.uid %>" class="modal fade" tabindex="-1" role="dialog" style="display: none;"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit <%=us.username%>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-user">
+                    
+                    <div class="form-group">
+                        <label for="account_no">Account Number</label>
+                        <input type="text" class="form-control" id="account_no" value="<%=us.account_no%>" required="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" value="<%=us.email%>" required="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pin">Pin</label>
+                        <input type="number" class="form-control" id="pin" value="<%=us.pin%>" required="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone_number">Phone Number</label>
+                        <input type="text" class="form-control" id="phone_number" value="<%=us.phone_number%>" required="">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="balance">Balance</label>
+                        <input type="text" class="form-control" id="balance" value="<%=us.balance%>" required="">
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <select class="form-control" id="country">
+                            <%countries.map(ct=>{%>
+                                <option <%=us.country === ct.name ? 'selected=""' : ''%> value="<%=ct.name%>">
+                                    <%=ct.name%>
+                                </option>
+                                <%})%>
+                        </select>
+                    </div>
+
+                    
+                    
+                    <input type="number" hidden="" value="<%=us.uid %>" id="id">
+
+                    <button type="submit" class="btn btn-success"> Save Changes </button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

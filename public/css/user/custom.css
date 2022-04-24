@@ -1,0 +1,17 @@
+.nav-tabs {
+    border-bottom: none !important;
+}
+
+.table-responsive ul.pagination {
+    text-align: center !important;
+    justify-content: center !important;
+}
+
+span.avatar.avatar-sm.rounded-circle img {
+    width: 36px;
+    height: 36px;
+}
+
+span.deposit-proveImg img {
+    width: 100% !important;
+}

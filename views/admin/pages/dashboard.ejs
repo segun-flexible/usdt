@@ -1,0 +1,90 @@
+<%-include("../partials/header");%>
+
+
+
+<div class="dashboard-ecommerce">
+    <div class="container-fluid dashboard-content ">
+    
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header">
+          <h2 class="pageheader-title">Admin Dashboard </h2>
+        </div>
+      </div>
+    </div>
+    
+    <!--BASIC STATS-->
+    <div class="row">
+      <!-- ============================================================== -->
+      <!-- sales  -->
+      <!-- ============================================================== -->
+      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+        <div class="card border-3 border-top border-top-primary">
+          <div class="card-body">
+            <h5 class="text-muted">Users</h5>
+            <div class="">
+              <span>Total Users: <strong><%=members.toLocaleString()%></strong></span><br>
+              <span>Active Members: <strong><%=activeMembers.toLocaleString()%></strong></span><br>
+              <span>Inactive Members: <strong><%=inactiveMembers.toLocaleString()%></strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ============================================================== -->
+      <!-- end sales  -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- new customer  -->
+      <!-- ============================================================== -->
+      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+        <div class="card border-3 border-top border-top-primary">
+          <div class="card-body">
+            <h5 class="text-muted">Total Transactions</h5>
+            <div class="metric-value d-inline-block">
+              <h3 class="mb-1"><%=totalTrans.toLocaleString()%></h3>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <!-- ============================================================== -->
+      <!-- end new customer  -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- visitor  -->
+      <!-- ============================================================== -->
+      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+        <div class="card border-3 border-top border-top-primary">
+          <div class="card-body">
+            <h5 class="text-muted">Total Income</h5>
+            <div class="metric-value d-inline-block">
+              <h3 class="mb-1"><%=websiteDetails.website_currency  + (incomes.toLocaleString())%></h3>
+            </div>
+    
+          </div>
+        </div>
+      </div>
+      <!-- ============================================================== -->
+      <!-- end visitor  -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- total orders  -->
+      <!-- ============================================================== -->
+      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+        <div class="card border-3 border-top border-top-primary">
+          <div class="card-body">
+            <h5 class="text-muted">Top Country</h5>
+            <div class="metric-value d-inline-block">
+              <h3 class="mb-1"><%=cnt%></h3>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <!-- ============================================================== -->
+      <!-- end total orders  -->
+      <!-- ============================================================== -->
+    </div>
+    <!--BASIC STATS-->
+
+<%-include("../partials/footer");%>

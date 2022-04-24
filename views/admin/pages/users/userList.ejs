@@ -1,0 +1,182 @@
+<%- include('../../partials/header'); %>
+
+
+
+
+    <div class="container-fluid dashboard-content">
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <h4 class="page-title">
+                        <%= title %>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="scroll-horizontal-datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4">
+                                    <div class="dataTables_length" id="scroll-horizontal-datatable_length">
+                                        
+                                        <form id="account_no" ><label>Search By Account No:</label><input type="search" class="form-control form-control-sm"
+                                                placeholder="Search By Account Number" aria-controls="scroll-horizontal-datatable"></form>
+                                    </div>
+                                </div>
+                                <br>
+                        
+                                
+                        
+                        
+                        
+                                <div class="col-sm-12 col-md-4">
+                                    <div class="dataTables_length" id="scroll-horizontal-datatable_length">
+                                        <label>Reset:</label><br>
+                                        <a href="javascript: void(0);" class="btn btn-xs btn-warning reset"><i
+                                                class="mdi mdi-delete-forever"></i> Reset
+                                            Query</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    
+                    <h5 class="card-header">
+                        <div class="actions float-right">
+                            
+                            
+                            
+                            <a href="javascript: void(0);" id="delete-all" class="btn btn-xs btn-danger ml-1">Delete Marked <i class="fa fa-trash"
+                                    aria-hidden="true"></i></a>
+                        
+                        
+                        </div>
+
+                    </h5>
+                    
+
+                    <div class="card-body p-0">
+                        <%if(users.length> 0){ %>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="bg-light">
+                                        <tr class="border-0">
+                                            <th class="border-0">
+                                                
+                                                <label class="custom-control custom-checkbox">
+                                                <input id="mark-head" type="checkbox" class="custom-control-input"><span class="custom-control-label"></span>
+                                            </label>
+                                            
+                                            </th>
+
+                                            <th class="border-0">#</th>
+                                            <th class="border-0">Account No.</th>
+                                           
+                                            <th class="border-0">Phone Number</th>
+                                            <th class="border-0">Balance</th>
+                                            <th class="border-0">Country</th>
+                                           
+                                            <th class="border-0">Date</th>
+                                            
+                                            
+                                            <th class="border-0">Action</th>
+                                            
+        
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%users.map((us,index)=>{ %>
+                                            <tr>
+
+                                                <td>
+                                                    <label class="custom-control custom-checkbox">
+                                                    <input data-id="<%=us.uid%>" id="mark" type="checkbox" class="custom-control-input"><span
+                                                        class="custom-control-label"></span>
+                                                </label>
+
+                                                </td>
+
+                                                <td>
+                                                    <%=index + 1 %>
+                                                </td>
+        
+                                                <td>
+                                                    <%=us.username%>
+                                                </td>
+                                                
+                                                <td>
+                                                    <%= us.phone_number %> 
+                                                </td>
+        
+                                                <td>
+                                                    <%= us.balance %> USDT 
+                                                </td>
+                                                <td>
+                                                    <%= us.country %> 
+                                                </td>
+                                                
+                                                <td>
+                                                    <%=us.created_at%>
+                                                </td>
+                                                
+                                                
+                                                
+                                                
+        
+                                                
+                                                <td>
+                                                    <a 
+                                                    href="javascript: void(0);" class="btn btn-xs btn-info ml-1 approved" data-toggle="modal" data-target="#edit-<%=us.uid%>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                   
+        
+                                                    <a id="delete-one"  data-id="<%=us.uid%>" href="javascript: void(0);" class="btn btn-xs btn-danger ml-1 "><i
+                                                            class="fa fa-trash" aria-hidden="true"></i></a>
+                                                </td>
+                                                
+        
+        
+                                            </tr>
+
+                                            
+                                            
+                                            <!--PAY MODAL-->
+                                            <%-include("./modal/editUserModal",{us})%>
+                                            
+                                            <!--PAY MODAL-->
+                                            <% }) %>
+        
+                                                <tr>
+                                                    <td colspan="9"></td>
+                                                </tr>
+                                    </tbody>
+        
+                                </table>
+
+                                <%-include("../../partials/pagination")%>
+                                
+        
+                            </div>
+                            <% }else{%>
+                                <h3 class="text-center pt-3">No User At The Moment</h3>
+                                <%}%>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        
+    </div>
+
+<script src="/js/admin/users/users.js"></script>
+<%-include('../../partials/footer'); %>

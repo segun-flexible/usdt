@@ -1,0 +1,97 @@
+<%- include('../../partials/header'); %>
+
+
+<div class="container-fluid dashboard-content">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title">
+                    <%= title %>
+                </h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <h5 class="card-header">Package List <div class="actions float-right">
+                
+                    <a data-toggle="modal" data-target="#createModal" href="javascript: void(0);" id="new-page"
+                        class="btn btn-xs btn-info ml-1 pay">New Package <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                
+                </div></h5>
+                <div class="card-body p-0">
+                    <%if(packages.length> 0){ %>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="bg-light">
+                                <tr class="border-0">
+                                    <th class="border-0">#</th>
+                                    <th class="border-0">Name</th>
+                                    <th class="border-0">Price</th>
+                                    <th class="border-0">Daily Withdrawal Limit</th>
+                                    <th class="border-0">Total Withdrawal Limit</th>
+                                    
+                                    <th class="border-0">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%packages.map((pk,index)=>{ %>
+                                <tr>
+                                    <td>
+                                        <%=index + 1 %>
+                                    </td>
+
+                                    <td>
+                                        <%=pk.p_name %>
+                                    </td>
+                                    <td>
+                                        <%=pk.p_price.toLocaleString() %> USDT
+                                    </td>
+                                   
+                                    
+                                    <td>
+                                        <%=pk.p_daily_withdrawal_limit%> USDT
+                                    </td>
+                                    <td>
+                                        <%=pk.p_total_withdrawal_limit%> USDT
+                                    </td>
+
+                                    
+                                    
+                                    <td>
+                                        <a
+                                            href="javascript: void(0);"
+                                            class="btn btn-xs btn-info ml-1"
+                                            data-toggle="modal"
+                                            data-target="#edit<%=pk.p_id %>"
+                                        >
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        </a>
+
+                                        <a onclick="deletePackage('<%=pk.p_id %>',this)" href="javascript: void(0);" class="btn btn-xs btn-danger ml-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                                <%- include('./modal/edit',{pk}); %>
+                                <% }) %>
+
+                                <tr>
+                                    <td colspan="9"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <% }else{%>
+                    <h3 class="text-center pt-3">No Package At The Moment</h3>
+                    <%}%>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%-include('./modal/create'); %>
+<script src="/js/admin/plans/plan.js"></script>
+<%- include('../../partials/footer'); %>

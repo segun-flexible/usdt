@@ -1,0 +1,56 @@
+<%-include("../../partials/header");%>
+
+<div class="container-fluid mt--6">
+
+
+
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3 header-title">Recharge Details</h4>
+        
+                    <form id="recharge">
+                        
+                        <div class="form-group">
+                            <label for="accountme">Recharge To</label>
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option><%=user.plan_name || 'VIP 0'%> (<%=user.account_no%>) - <%=user.balance.toLocaleString()%> USDT</option>
+                                
+                            </select>
+                        </div>
+    
+        
+                        
+        
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3 header-title">Reciever Details</h4>
+                    
+        
+                        <div class="form-group">
+                            <label for="amount">Amount (USDT)</label>
+                            <input type="number" value="0" class="form-control" id="amount" required>
+                        </div>
+        
+                        <button type="submit" id="submit" class="btn btn-primary waves-effect waves-light">Recharge Account</button>
+                    </form>
+        
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div>
+
+
+    </div>
+
+
+<script src="/js/user/recharge.js"></script>
+<script src="/js/partials/fetcher.js"></script>
+<script src="/js/partials/sweetalert.js"></script>
+<%-include("../../partials/footer");%>

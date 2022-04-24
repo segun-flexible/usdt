@@ -1,0 +1,174 @@
+<html class="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta content="<%= websiteDetails.website_description %>" name="description">
+    <meta content="<%= websiteDetails.website_author %>" name="author">
+    <title>
+        <%=title%>
+    </title>
+    <link rel="canonical" href="<%=longUrl%>">
+
+    <link rel="icon" href="<%= websiteDetails.website_favicon %>" type="image/png"><!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"><!-- Icons -->
+    <link rel="stylesheet" href="/css/user/nuclear.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        type="text/css">
+    <!-- Page plugins -->
+
+    <link rel="stylesheet" href="/css/user/auth.css" type="text/css">
+    <!-- Nucleo icons -->
+
+</head>
+
+<body>
+
+    <div class="main-content">
+        <!-- Header -->
+        <div class="header bg-gradient-primary py-7 py-lg-8 pt-lg-9">
+            <div class="container">
+                <div class="header-body text-center mb-7">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-5 col-lg-6 col-md-8 px-5">
+                            <h1 class="text-white">Welcome Dear Customer!</h1>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="separator separator-bottom separator-skew zindex-100"><svg x="0" y="0" viewBox="0 0 2560 100"
+                    preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+                </svg></div>
+        </div><!-- Page content -->
+        <div class="container mt--9 pb-5 text-gray">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-7">
+                    <div class="card bg-secondary border border-soft mb-0">
+
+                        <div class="card-body px-lg-5 py-lg-5">
+                            <center><img style="width: 100px;" src="<%= websiteDetails.website_logo%>" /></center>
+                            <div class="text-center mb-4"><small>Fill in your necessary credentials and signup</small></div>
+                            <form id="register">
+                              
+
+                                
+                                <div class="form-group mb-3">
+                                    <div class="input-group input-group-merge input-group-alternative">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i
+                                                    class="ni ni-single-02"></i></span></div><input class="form-control"
+                                            placeholder="Username" type="text" id="username" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <div class="input-group input-group-merge input-group-alternative">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i
+                                                    class="ni ni-email-83"></i></span></div><input class="form-control"
+                                            placeholder="Email" type="email" id="email" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <div class="input-group input-group-merge input-group-alternative">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i
+                                                    class="ni ni-lock-circle-open"></i></span></div><input class="form-control"
+                                            placeholder="Password" type="password" id="password1" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group input-group-merge input-group-alternative">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i
+                                                    class="ni ni-lock-circle-open"></i></span></div><input
+                                            class="form-control" placeholder="Confirm Password" type="password" id="password2" required>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group mb-3">
+                                    <div class="input-group input-group-merge input-group-alternative">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="ni ni-key-25"></i></span>
+                                        </div><input class="form-control" placeholder="Withdrawal PIN" type="password" maxlength="4" id="pin" required>
+                                    </div>
+                                    
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="input-group input-group-merge input-group-alternative">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="ni ni-key-25"></i></span>
+                                        </div><input class="form-control" placeholder="Confirm Withdrawal PIN" type="password" maxlength="4" id="pin2" required>
+                                    </div>
+                                    <small class="text-danger">Withdrawal PIN can not be changed after registration. </small>
+                                </div>
+
+
+                                <div class="form-group mb-3">
+                                    <div class="input-group input-group-merge input-group-alternative">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="ni ni-mobile-button"></i></span></div>
+                                        <input class="form-control" placeholder="Phone Number" type="text" id="phone_number" required>
+                                    </div>
+                                </div>
+                                
+                                
+
+                                <div class="form-group mb-3">
+                                    <div class="input-group input-group-merge input-group-alternative">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="ni ni-world"></i></span></div>
+                                        <select required="" id="country" class="form-control">
+                                            <option value="">Select Country</option>
+                                            <%countries.map(ct =>{%>
+                                                <option value="<%=ct.name%>"><%=ct.name%></option>
+                                            <%})%>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <div class="input-group input-group-merge input-group-alternative">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="ni ni-box-2"></i></span></div>
+                                        <select required="" id="wallet-type" class="form-control">
+                                            <option value="">Wallet Type</option>
+                                            <option value="trc20">TRC20</option>
+                                            <option value="bep20">BEP20</option>
+                                            <option value="erc20">ERC20</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <div class="input-group input-group-merge input-group-alternative">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="ni ni-box-2"></i></span></div>
+                                        <input class="form-control" placeholder="USDT Wallet Address" type="text" id="wallet-address" required>
+                                    </div>
+                                    <small class="text-danger">Kindly crosscheck this USDT wallet address. You can not make changes to it after registration. </small>
+                                </div>
+
+                                
+                                
+                                <div class="custom-control custom-control-alternative custom-checkbox"><input class="custom-control-input" id="agreed" type="checkbox" required> <label class="custom-control-label" for="agreed"><span>By creating an account, you agree with the <a href="#">terms and conditions</a> </span></label></div>
+                                
+
+                                <div class="text-center"><button type="submit" class="btn btn-primary my-4">Register</button></div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-6 text-right"><a href="/login" class="text-gray"><small>Already a customer?, Login</small></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="/js/auth/register.js"></script>
+    <script src="/js/partials/fetcher.js"></script>
+    <script src="/js/partials/sweetalert.js"></script>
+
+
+</body>
+
+</html>
