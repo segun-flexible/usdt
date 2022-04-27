@@ -1,6 +1,7 @@
 const asyncHandler = require("../../helpers/asyncHandler");
 const { insertIntoRechargeHistory, insertIntoSubHistory } = require("../../helpers/history");
 const { getUniqueID } = require("../../helpers/uniqueID");
+const { creditReferral } = require("../../helpers/upline");
 
 const { getUserById, editUserById } = require("../../helpers/user");
 
@@ -14,7 +15,6 @@ exports.coinbaseChargeWebHook = asyncHandler(async (req, res, next) => {
     //CONFIRMED
     if(coinbase.type === "charge:confirmed"){
 
-        //Change Plan Details To Paid and Its Status
         let total = 0;
 
         for(i=0; i < coinbase.data.payments.length; i++) total += parseFloat(coinbase.data.payments[i].net.local.amount);
@@ -32,6 +32,8 @@ exports.coinbaseChargeWebHook = asyncHandler(async (req, res, next) => {
             amount: total,
             user_id: coinbase.data.metadata.customer_id
         });
+
+        await creditReferral(coinbase.data.metadata.customer_id, total)
 
 
         
@@ -57,6 +59,7 @@ exports.coinbaseChargeWebHook = asyncHandler(async (req, res, next) => {
                 user_id: coinbase.data.metadata.customer_id
             });
         
+            await creditReferral(coinbase.data.metadata.customer_id, total)
         
     }
     
