@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const obj = {
             oldPassword: e.currentTarget.querySelector("input#old-password").value,
-            password: e.currentTarget.querySelector("input#password1").value
+            password: e.currentTarget.querySelector("input#password1").value,
+            pin: e.currentTarget.querySelector("input#pin").value
         };
     
 

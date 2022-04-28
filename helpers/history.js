@@ -105,7 +105,18 @@ exports.getUserSubHistoryByUserid = (userId,type,limit,offset) => {
 exports.adminGetTransactionHistory = (limit,offset) => {
     return new Promise((resolve, reject) => {
 
-        db.query(`SELECT * FROM f_transaction_history JOIN f_users ON uid = user_id ORDER BY h_id DESC LIMIT ${limit} OFFSET ${offset}`, (err, data) => {
+        db.query(`SELECT * FROM f_transaction_history JOIN f_users ON uid = user_id ORDER BY amount DESC LIMIT ${limit} OFFSET ${offset}`, (err, data) => {
+            if (err) reject(err)
+            else resolve(data)
+        })
+    })
+}
+
+//GET USER TRANSACTION
+exports.adminGetWithdrawalHistory2 = (limit,offset) => {
+    return new Promise((resolve, reject) => {
+
+        db.query(`SELECT * FROM f_withdrawal_history JOIN f_users ON uid = user_id ORDER BY amount DESC LIMIT ${limit} OFFSET ${offset}`, (err, data) => {
             if (err) reject(err)
             else resolve(data)
         })

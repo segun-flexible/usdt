@@ -55,6 +55,13 @@ exports.userSecurityGet = asyncHandler(async (req, res, next) => {
 exports.userSecurityPost = asyncHandler(async (req, res, next) => {
     const { id } = await openToken(req.signedCookies[process.env.TOKEN_NAME]);
 
+    const user = await getUserById(id);
+
+    //Check If Pin Is Valid
+    if (req.body.pin !== user.pin) {
+        return res.json({status:false,message:"Invalid PIN"})
+    }
+
     //FOR PASSWORD
     if (req.body.password) {
         

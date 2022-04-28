@@ -13,19 +13,14 @@ document.addEventListener("DOMContentLoaded", () => {
         
 
         submit = e.currentTarget.querySelector("button")
-        const trade = await fetchResourse(obj, window.location.href, "POST", "noload");
-
-        if(trade.status){
-            localStorage.setItem("trade",true);
-            window.location.reload()
-        }
-
+        await fetchResourse(obj, window.location.href, "POST", "reload");
 
         
     })
     
+    
 
-    if(localStorage.getItem("trade")){
+    if(document.querySelector("#isTrading").value){
         document.querySelector("a#tradeStatus").innerHTML = `<i class="fa fa-spinner rotate" aria-hidden="true"></i> USDT Trade Is Running`
     }
     

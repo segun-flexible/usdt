@@ -1,6 +1,6 @@
 const asyncHandler = require("../../helpers/asyncHandler");
 const { openToken } = require("../../helpers/jwt");
-const { getUserTransactionHistoryByUserid, getUserRechargeHistoryByUserid, getUserSubHistoryByUserid, getUserWithdrawalHistoryByUserid, adminGetTransactionHistory } = require("../../helpers/history");
+const { getUserTransactionHistoryByUserid, getUserRechargeHistoryByUserid, getUserSubHistoryByUserid, getUserWithdrawalHistoryByUserid, adminGetTransactionHistory, adminGetWithdrawalHistory2 } = require("../../helpers/history");
 const { getDateFormatForPost, extractTime } = require("../../helpers/dateTime");
 const { editUserById, getUserById } = require("../../helpers/user");
 
@@ -15,7 +15,8 @@ exports.userDashboardGet = asyncHandler(async (req, res, next) => {
 
 
 
-    const history = await adminGetTransactionHistory(50, 0);
+    const history = await adminGetTransactionHistory(10, 0);
+    const history2 = await adminGetWithdrawalHistory2(10, 0);
     
     for(i=0; i < history.length; i++){
 
@@ -25,10 +26,18 @@ exports.userDashboardGet = asyncHandler(async (req, res, next) => {
 
     }
     
+    for(i=0; i < history2.length; i++){
+
+        history2[i].time = extractTime(history2[i].issue_at,"hh:mm A");
+        history2[i].date = getDateFormatForPost(history2[i].issue_at)
+
+    }
+    
 
     res.render("user/pages/dashboard/dashboard", {
         title: "My Dashboard",
         history,
+        history2,
         totalTrans: trans1.length + trans2.length + trans3.length + trans4.length
     })
 })
@@ -54,7 +63,8 @@ exports.tradePost = asyncHandler(async (req, res, next) => {
     };
 
     await editUserById(id,{
-        balance: user.balance - parseFloat(req.body.amount)
+        balance: user.balance - parseFloat(req.body.amount),
+        is_trading: 1
     });
 
     res.json({status:true,message:"Trade Started"})
