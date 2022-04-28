@@ -1,5 +1,5 @@
 
-const { userDashboardGet } = require("../../controllers/user/dashboard");
+const { userDashboardGet, tradePost } = require("../../controllers/user/dashboard");
 const { userTransactionHistoryGet } = require("../../controllers/user/history/transactionHistory");
 const { userRechargeHistoryGet } = require("../../controllers/user/history/rechargeHistory");
 const { rechargeGet, rechargePost } = require("../../controllers/user/recharge");
@@ -12,13 +12,14 @@ const { userWithdrawalHistoryGet } = require("../../controllers/user/history/wit
 const { userUpgradeGet, userUpgradePost, userUpgradePut } = require("../../controllers/user/upgrade");
 const { userSubHistoryGet } = require("../../controllers/user/history/subHistory");
 const { paymentProofMulter } = require("../../multer/multerMiddleware");
+const { userReferralHistoryGet } = require("../../controllers/user/history/referralHistory");
 
 
 const userRoute = require("express").Router();
 
 //<!-----------------DASHBOARD------------------>
 //DASHBOARD
-userRoute.route("/dashboard").get(isUserLogin, denyAdmin, userDashboardGet)
+userRoute.route("/dashboard").get(isUserLogin, denyAdmin, userDashboardGet).post(isUserLogin, denyAdmin, tradePost)
 
 //<!-----------------TRANSFER------------------>
 //TRANSFER
@@ -49,6 +50,9 @@ userRoute.route("/history/withdraw").get(isUserLogin, denyAdmin, userWithdrawalH
 
 //SUBSCRIPTION HISTORY
 userRoute.route("/history/subscription").get(isUserLogin, denyAdmin, userSubHistoryGet)
+
+//REFERRAL HISTORY
+userRoute.route("/referral").get(isUserLogin, denyAdmin, userReferralHistoryGet)
 
 //<!-----------------SETTINGS------------------>
 //PROFILE

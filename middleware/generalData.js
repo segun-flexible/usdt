@@ -14,6 +14,7 @@ exports.generalData = (app) => {
 
             req.app.locals.shortUrl = req.originalUrl
             req.app.locals.longUrl = req.protocol + "://" + req.get('host') + req.originalUrl
+            res.locals.homeUrl = req.protocol + "://" + req.get('host');
             
             
             app.locals.websiteDetails = data;

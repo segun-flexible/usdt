@@ -1,0 +1,146 @@
+<%-include("../../partials/header")%>
+
+<div class="container-fluid mt--6">
+
+
+
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card">
+                    <div class="card-header bg-transparent">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h5 class="text-uppercase text-muted ls-1 mb-1">My Referral Link</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form id="referral">
+        
+        
+        
+                            <div class="form-group mb-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" aria-label="Referral Link"
+                                        value="<%= homeUrl%>/register?referby=<%=user.username %>" readonly>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-dark waves-effect waves-light" type="submit">Copy Link</button>
+                                    </div>
+                                </div>
+                            </div>
+        
+        
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card">
+                    <h5 class="card-header"><%=title%></h5>
+                    <div class="card-body p-0">
+                        <%if(history.length> 0){ %>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="bg-light">
+                                        <tr class="border-0">
+                                            <th class="border-0">#</th>
+                                            <th class="border-0">User</th>
+                                            <th class="border-0">Amount</th>
+                                            <th class="border-0">Date</th>
+                                            <th class="border-0">Status</th>
+                                            
+                                            
+                                            
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%history.map((ht,index)=>{ %>
+                                            <tr>
+                                                <td>
+                                                    <%=index + 1 %>
+                                                </td>
+                                                
+                                                <td class="text-capitalize">
+                                                    <%=ht.username%>
+                                                </td>
+
+                                                <td>
+                                                    <%=ht.r_amount.toLocaleString()%> USDT
+                                                </td>
+                                               
+                                                <td>
+                                                    <%=ht.date%>,<%=ht.time%>
+                                                </td>
+
+                                                <td>
+                                                    <%if(ht.r_status){%>
+                                                        <button type="button" class="btn btn-success btn-sm waves-effect waves-light">Success</button>
+                                                    <%}else{%>
+                                                        <button type="button" class="btn btn-danger btn-sm waves-effect waves-light">Unverified</button>
+                                                    <%}%>
+                                                </td>
+                                                
+                                                
+
+                                                
+
+
+                                            </tr>
+
+                                            
+                                            
+                                            <% }) %>
+
+                                                
+                                    </tbody>
+
+                                </table>
+
+
+
+                                
+
+                            </div>
+                            <%if(history.length){%>
+                    <%-include("../../partials/pagination");%>
+                    <%}%>
+                            <% }else{%>
+                                <h3 class="text-center pt-3">No Referral At The Moment</h3>
+                                <%}%>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="tips" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalScrollableTitle"><i class="bi bi-megaphone"></i> Tips On Refer And Earn</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i data-feather="x"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        You earn <%=websiteDetails.website_referral_percentage%>% anytime your downline recharge USDT.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            <span class="d-flex">Close</span>
+                        </button>
+                        <button id="closenotice" type="button" class="btn btn-primary ml-1" data-dismiss="modal">
+                            <span class="d-flex">Okay</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button id="tipsBtn" data-toggle="modal" data-target="#tips" hidden></button>
+
+        <script src="/js/user/referral.js"></script>
+        <script src="/js/partials/fetcher.js"></script>
+        <script src="/js/partials/sweetalert.js"></script>
+<%-include("../../partials/footer")%>
