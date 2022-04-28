@@ -8,7 +8,6 @@ const { signToken } = require("../../helpers/jwt");
 const { getRandomNumber } = require("../../helpers/uniqueID");
 const { welcomeMailer } = require("../../email/mails/welcomeMail");
 const { countries } = require("../../extras/country");
-const { createNewUpline } = require("../../helpers/upline");
 
 
 //REGISTER (GET)
@@ -42,35 +41,22 @@ exports.userRegisterPost = asyncHandler(async (req, res, next) => {
     } catch (error) {
         let message;
         if (error.sqlMessage.includes("phone")) {
-            message = "Phone Number Already Taken By Another User"
+            message = "Phone Number Already Taken"
         } else if (error.sqlMessage.includes("email")) {
-            message = "Email Already Taken By Another User"
+            message = "Email Already Taken"
         }
 
         return res.json({status:false,message})
     }
 
-    //Setting And Saving Upline
-    if (req.query.referby) {
-        const user = await getUserByUsername(req.query.referby);
-        
-        if (user && user.uid !== insertId) {
-            
-            const refObj = {
-                r1_id: user.uid,
-                r2_id: insertId
-            };
-        
-            await createNewUpline(refObj);
-
-        }
-        
-        
-    }
-
 
     //Response To User
     res.json({status:true,message:"Registration Successful",goto:"/login"})
+
+    //Send Welcome Mail
+    //const userObj = await getUserById(insertId);
+    //userObj.year = new Date().getFullYear()
+    //welcomeMailer(userObj)
 
 })
 

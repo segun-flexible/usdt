@@ -15,19 +15,3 @@ span.avatar.avatar-sm.rounded-circle img {
 span.deposit-proveImg img {
     width: 100% !important;
 }
-
-.rotate {
-    animation: rotation 2s infinite linear;
-    -webkit-animation: rotation 2s infinite linear;
-  }
-
-  
-
-  @-webkit-keyframes rotation {
-		from {
-				-webkit-transform: rotate(0deg);
-		}
-		to {
-				-webkit-transform: rotate(359deg);
-		}
-}

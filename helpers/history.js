@@ -159,23 +159,3 @@ exports.getIncomes = () => {
         })
     })
 }
-
-
-//GET USER REFERRAL HISTORY
-exports.getUserReferralHistory = (status,userId,limit,offset,order) => {
-    return new Promise((resolve, reject) => {
-        let query;
-
-        if (status) {
-            query = `SELECT * FROM f_referrals A JOIN f_users B ON A.r2_id = B.uid WHERE A.r1_id = ${parseInt(userId)} AND status = ${parseInt(status)} ORDER BY r_id ${order ? order : 'DESC' } LIMIT ${limit} OFFSET ${offset}`;
-        } else {
-            query = `SELECT * FROM f_referrals A JOIN f_users B ON A.r2_id = B.uid WHERE A.r1_id = ${parseInt(userId)} ORDER BY r_id ${order ? order : 'DESC' } LIMIT ${limit} OFFSET ${offset}`;
-        }
-        db.query(query, (err, data) => {
-            if (err) reject(err)
-            else return resolve(data)
-        })
-        
-        
-    })
-}
